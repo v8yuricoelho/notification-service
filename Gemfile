@@ -40,6 +40,8 @@ gem 'bootsnap', require: false
 
 gem 'aws-sdk-sqs'
 
+gem 'dotenv'
+
 gem 'faraday'
 
 gem 'shoryuken'
