@@ -8,7 +8,8 @@ RSpec.describe NotificationMailer, type: :mailer do
     {
       'user_email' => 'test@example.com',
       'url' => 'https://example.com',
-      'status' => 'pending'
+      'status' => 'pending',
+      'task_id' => 1
     }
   end
 
@@ -22,7 +23,7 @@ RSpec.describe NotificationMailer, type: :mailer do
     end
 
     it 'renders the body' do
-      expect(mail.body.encoded).to match(task['url'])
+      expect(mail.body.encoded).to include(task['url'])
     end
   end
 
@@ -35,8 +36,9 @@ RSpec.describe NotificationMailer, type: :mailer do
       expect(mail.from).to eq(['no-reply@example.com'])
     end
 
-    it 'renders the body' do
-      expect(mail.body.encoded).to match(task['url'])
+    it 'renders the body with task status and task ID' do
+      expect(mail.body.encoded).to include(task['status'])
+      expect(mail.body.encoded).to include(task['task_id'].to_s)
     end
   end
 end
